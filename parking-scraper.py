@@ -35,6 +35,21 @@ def arrayToString(array):
 
     return myString
 
+def initializeTwython():
+    APP_KEY = 'REDACTED'
+    APP_SECRET = 'REDACTED'
+    OAUTH_TOKEN = 'REDACTED'
+    OAUTH_TOKEN_SECRET = 'REDACTED'
+
+    twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+
+    auth = twitter.get_authentication_tokens()
+
+    return twitter
+
+def tweet(twitter, tweetString):
+    twitter.update_status(status=tweetString)
+
 #makes two lists: one for garage names, another empty list for the spots of each garage
 garages = ["A", "B", "C", "D", "H", "I", "Libra"]
 spots = []
@@ -54,18 +69,11 @@ for garage in sorted(dictionary):
     printGarage(garage)
 
 #converts array "s" into a big string ready to tweet
-tweet = arrayToString(s)
+tweetString = arrayToString(s)
 
-print tweet
+print tweetString
 
-APP_KEY = 'REDACTED'
-APP_SECRET = 'REDACTED'
-OAUTH_TOKEN = 'REDACTED'
-OAUTH_TOKEN_SECRET = 'REDACTED'
-
-twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
-
-auth = twitter.get_authentication_tokens()
+twitter = initializeTwython()
 
 #Tweet!
-twitter.update_status(status=tweet)
+tweet(twitter, tweetString)
