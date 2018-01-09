@@ -7,9 +7,9 @@ import re
 
 def printGarage(garage):
     if garage == "Libra":
-        s.append("Libra Garage: " + str(dictionary[garage]))
+        textArray.append("Libra Garage: " + str(dictionary[garage]))
     else:
-        s.append("Garage " + garage + ": " + str(dictionary[garage]))
+        textArray.append("Garage " + garage + ": " + str(dictionary[garage]))
 
 def initializeBeautifulSoup():
     url = "http://secure.parking.ucf.edu/GarageCount/"
@@ -61,15 +61,15 @@ initializeBeautifulSoup()
 dictionary = dict(zip(garages, spots))
 
 #Creates empty array to later construct one big string
-s = []
-s.append("Spots available")
+textArray = []
+textArray.append("Spots available")
 
 #loops through each garage in the dictionary and prints out each one
 for garage in sorted(dictionary):
     printGarage(garage)
 
 #converts array "s" into a big string ready to tweet
-tweetString = arrayToString(s)
+tweetString = arrayToString(textArray)
 
 print tweetString
 
