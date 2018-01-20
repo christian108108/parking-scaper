@@ -2,5 +2,6 @@
 Presents the number of spots available in the parking garages at UCF
 
 # Dependencies
-BeautifulSoup4
-Twython
+BeautifulSoup4 \n
+Twython \n
+lxml
