@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from test import *
+from parking_scraper import *
 
 
 #scrape the website for parking spots
