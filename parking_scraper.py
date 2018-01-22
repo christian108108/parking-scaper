@@ -133,7 +133,7 @@ def prepare_direct_message(building, garage_list, gmaps):
 
     #if the building is not found, then just return the generic public tweet with a help message
     if building is None:
-        return "%s\n\nFor the list of building codes, go to map.ucf.edu/locations" % prepare_public_tweet(garage_list)
+        return "%s\n\nFor a list of building codes, go to map.ucf.edu/locations" % prepare_public_tweet(garage_list)
 
     #iterates through each garage in the list
     for garage in garage_list[:-1]:
