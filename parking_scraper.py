@@ -139,10 +139,10 @@ def prepare_direct_message(building, garage_list, gmaps):
     for garage in garage_list[:-1]:
         #grabs walking distance from garage x, building short code (ex. MSB), garage name (ex. Garage D), and spots left
         #adds to the final message
-        message += "%s to %s: %s. %d spots free\n" % (garage, building.abbreviation, building.get_directions(garage, gmaps), garage.spots)
+        message += "%s to %s: %s walk. %d spots free\n" % (garage, building.abbreviation, building.get_directions(garage, gmaps), garage.spots)
 
     #prints the last line to treat it differently (no \n chararacter)
-    message += "%s to %s: %s. %d spots free" % (garage_list[-1], building.abbreviation, building.get_directions(garage_list[-1], gmaps), garage_list[-1].spots)
+    message += "%s to %s: %s walk. %d spots free" % (garage_list[-1], building.abbreviation, building.get_directions(garage_list[-1], gmaps), garage_list[-1].spots)
 
     return message
 
@@ -165,19 +165,3 @@ def tweet(twitter, tweetString):
 
 def initialize_google_maps():
     return googlemaps.Client(key='')
-
-def main():
-
-    #initialize google maps
-    gmaps = initialize_google_maps()
-
-    #generates soup from web scraping
-    soup = generate_soup()
-
-    #populates the garage list
-    garage_list = populate_garage_list(soup)
-
-    #populates building list with the data from JSON file
-    building_list = populate_building_list()
-
-#main()
