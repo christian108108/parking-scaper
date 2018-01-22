@@ -73,14 +73,13 @@ def is_valid_item(item):
 
 def search_building_list(building_list, input_name):
     #search building list for the one the user wants to navigate to
-    found = False
     for building in building_list:
         #if the name or abbreviation match, then return the coordinates
         if (building.name.upper() == input_name) or (building.abbreviation == input_name):
             return building
-            found = True
-    if not found:
-        return search_building_list(building_list, "STUN")
+
+    #if it can't find the building, return None
+    return None
 
 def populate_building_list():
     #opens locations.json file and stores it as variable d
@@ -130,16 +129,20 @@ def prepare_public_tweet(garage_list):
 
 def prepare_direct_message(building, garage_list, gmaps):
     #prepares a string to send in a direct message
-    message = "Spots available\n"
+    message = ""
+
+    #if the building is not found, then just return the generic public tweet with a help message
+    if building is None:
+        return "%s\n\nFor the list of building codes, go to map.ucf.edu/locations" % prepare_public_tweet(garage_list)
 
     #iterates through each garage in the list
     for garage in garage_list[:-1]:
         #grabs walking distance from garage x, building short code (ex. MSB), garage name (ex. Garage D), and spots left
         #adds to the final message
-        message += "%s to %s: %d  %s\n" % (garage, building.name, garage.spots, building.get_directions(garage, gmaps))
+        message += "%s to %s: %s. %d spots free\n" % (garage, building.abbreviation, building.get_directions(garage, gmaps), garage.spots)
 
     #prints the last line to treat it differently (no \n chararacter)
-    message += "%s to %s: %d  %s" % (garage_list[-1], building.name, garage_list[-1].spots, building.get_directions(garage_list[-1], gmaps))
+    message += "%s to %s: %s. %d spots free" % (garage_list[-1], building.abbreviation, building.get_directions(garage_list[-1], gmaps), garage_list[-1].spots)
 
     return message
 
@@ -177,4 +180,4 @@ def main():
     #populates building list with the data from JSON file
     building_list = populate_building_list()
 
-main()
+#main()
